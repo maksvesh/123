@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config>
+        <trust-anchors>
+            <certificates src="system" />
+            <!-- GigaChat endpoints are signed by the Russian national root CA.
+                 Put the .cer file (DER or PEM) from the Russian Ministry of Digital Development
+                 into app/src/main/res/raw/russian_trusted_root_ca.cer -->
+            <certificates src="@raw/russian_trusted_root_ca" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
