@@ -14,7 +14,10 @@ interface Translator {
 fun buildTranslator(settings: AppSettings, http: OkHttpClient): Translator = when (settings.provider) {
     Provider.GIGACHAT -> GigaChatTranslator(
         http = http,
-        authKey = settings.gigachatAuthKey,
+        authKey = android.util.Base64.encodeToString(
+            "${settings.gigachatClientId}:${settings.gigachatClientSecret}".toByteArray(),
+            android.util.Base64.NO_WRAP,
+        ),
         scope = settings.gigachatScope,
         model = settings.model(Provider.GIGACHAT),
     )

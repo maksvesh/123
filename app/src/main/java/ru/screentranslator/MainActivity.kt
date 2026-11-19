@@ -56,7 +56,8 @@ fun SettingsScreen() {
     val running by ScreenTranslatorService.running.collectAsState()
 
     var provider by remember { mutableStateOf(settings.provider) }
-    var gcAuth by remember { mutableStateOf(settings.gigachatAuthKey) }
+    var gcClientId by remember { mutableStateOf(settings.gigachatClientId) }
+    var gcClientSecret by remember { mutableStateOf(settings.gigachatClientSecret) }
     var gcScope by remember { mutableStateOf(settings.gigachatScope) }
     var cfAccount by remember { mutableStateOf(settings.cloudflareAccountId) }
     var cfToken by remember { mutableStateOf(settings.cloudflareToken) }
@@ -69,7 +70,8 @@ fun SettingsScreen() {
     fun save() {
         settings.provider = provider
         settings.setModel(provider, model.trim())
-        settings.gigachatAuthKey = gcAuth.trim()
+        settings.gigachatClientId = gcClientId.trim()
+        settings.gigachatClientSecret = gcClientSecret.trim()
         settings.gigachatScope = gcScope.trim()
         settings.cloudflareAccountId = cfAccount.trim()
         settings.cloudflareToken = cfToken.trim()
@@ -129,8 +131,14 @@ fun SettingsScreen() {
 
             if (provider == Provider.GIGACHAT) {
                 OutlinedTextField(
-                    gcAuth, { gcAuth = it },
-                    label = { Text("Authorization key (Base64)") },
+                    gcClientId, { gcClientId = it },
+                    label = { Text("Client ID") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                OutlinedTextField(
+                    gcClientSecret, { gcClientSecret = it },
+                    label = { Text("Client Secret") },
                     visualTransformation = PasswordVisualTransformation(),
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),

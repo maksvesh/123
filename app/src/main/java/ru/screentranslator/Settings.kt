@@ -49,9 +49,13 @@ class AppSettings(context: Context) {
         get() = Provider.entries.firstOrNull { it.name == str("provider") } ?: Provider.GIGACHAT
         set(v) = put("provider", v.name)
 
-    var gigachatAuthKey: String
-        get() = str("gc_auth")
-        set(v) = put("gc_auth", v)
+    var gigachatClientId: String
+        get() = str("gc_client_id")
+        set(v) = put("gc_client_id", v)
+
+    var gigachatClientSecret: String
+        get() = str("gc_client_secret")
+        set(v) = put("gc_client_secret", v)
 
     var gigachatScope: String
         get() = str("gc_scope", "GIGACHAT_API_PERS")
